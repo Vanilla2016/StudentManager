@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.wds.beans.Student;
+import com.wds.sort.BubbleSort;
+import com.wds.sort.Sort;
 
 /**
  * Servlet implementation class SortServlet
@@ -39,7 +41,21 @@ public class SortServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		students = (Student[])session.getAttribute("studentTable");
-		//doGet(request, response);
+		Sort sort = new BubbleSort();
+		
+		try {
+			
+			students = sort.sort(students);
+		} catch (Exception e) {
+				System.out.println("Error sorting Students " +e.getMessage());
+				request.setAttribute("errorMessage", "Error sorting Students.");
+				request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(
+						request, response);
+		}
+		request.setAttribute("successMessage", "Student scores sorted. Details are below. ");
+		request.setAttribute("studentTable", students);
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(
+				request, response);
 	}
 
 }

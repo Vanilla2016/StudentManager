@@ -42,7 +42,7 @@
 	</table>
 
 	<form method="POST" action="sort.do">
-		<% request.setAttribute("studentTable", students); %>
+		<% session.setAttribute("studentTable", students); %>
 		<input type="radio" id="bubble" name="sort_type" value="bubble" checked="checked">
 		<label for="bubble">Bubble Sort</label><br>
 		<button  type="submit"  style="height: 50px; width: 100px">Choose Sort Option and Click to Sort</button>
